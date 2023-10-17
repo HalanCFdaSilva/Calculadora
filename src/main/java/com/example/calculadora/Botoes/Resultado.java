@@ -26,23 +26,20 @@ public class Resultado {
         while (equacao.contains("+")||equacao.contains("x")||
                 equacao.contains("-")||equacao.contains("÷")){
 
-            if(separacao == 0){
-                if(equacao.startsWith("-")){
 
-                    this.sinais.set(0, "-");
-                    equacao = equacao.substring(equacao.indexOf("-") + 1);
-                    proximaOperacao = verificaProximoOperador(equacao);
-                    separacao = equacao.indexOf(proximaOperacao);
-                    String numeroRetirado = equacao.substring(inicioSeparacao,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado));
-                    this.sinais.add(String.valueOf(equacao.charAt(separacao)));
-                    equacao = equacao.substring(separacao + 1);
+            if(equacao.startsWith("-")){
+
+                this.sinais.set(0, "-");
+                equacao = equacao.substring(equacao.indexOf("-") + 1);
+                proximaOperacao = verificaProximoOperador(equacao);
+                separacao = equacao.indexOf(proximaOperacao);
+                String numeroRetirado = equacao.substring(inicioSeparacao,separacao);
+                this.numeros.add(Double.parseDouble(numeroRetirado));
+                this.sinais.add(String.valueOf(equacao.charAt(separacao)));
+                equacao = equacao.substring(separacao + 1);
+            }
 
 
-                }
-            }else {
-
-                System.out.println("entrou2");
                 proximaOperacao = verificaProximoOperador(equacao);
                 separacao = equacao.indexOf(proximaOperacao);
                 String numeroRetirado = equacao.substring(inicioSeparacao,separacao);
@@ -50,8 +47,10 @@ public class Resultado {
                 this.sinais.add(String.valueOf(equacao.charAt(separacao)));
                 equacao = equacao.substring(separacao + 1);
 
-            }
+
+            equacao.startsWith("fim");
         }
+        equacao.startsWith("saiu");
         this.numeros.add(Double.parseDouble(equacao));
 
 
@@ -111,8 +110,8 @@ public class Resultado {
         if(this.sinais.get(0).equals("-")){
             this.numeros.set(0,-this.numeros.get(0));
             System.out.println(this.sinais.get(0));
-            this.sinais.remove(0);
         }
+        this.sinais.remove(0);
         
 
         for (int i = 0; i<this.numeros.size();i++){
@@ -169,46 +168,6 @@ public class Resultado {
 
         this.resultadoFinal = this.numeros.get(0).toString();
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //                          OUTRA FORMA DE CALCULAR
-        /*int i = 0;
-        String sinal = this.getSinal(i);
-        while(sinal!= null){
-            switch (sinal){
-                case "+" -> {
-                    if (this.resultadoParcial ==0){
-                        this.resultadoParcialBackup = this.resultadoParcial;
-                        this.resultadoParcial = this.numeros[i] + this.numeros[i+1];
-                    }else{
-                        this.resultadoParcial += this.numeros[i+1];
-                    }
-                }
-                case "-" -> {
-                    if (this.resultadoParcial ==0){
-                        this.resultadoParcial = this.numeros[i] - this.numeros[i+1];
-                    }else{
-                        this.resultadoParcial -= this.numeros[i+1];
-                    }
-                }
-                case "x" -> {
-                    if (this.resultadoParcial ==0){
-                        this.resultadoParcial = this.numeros[i] * this.numeros[i+1];
-                    }else{
-                        this.resultadoParcial *= this.numeros[i+1];
-                    }
-                }
-                case "÷" -> {
-                    if (this.resultadoParcial ==0){
-                        this.resultadoParcial = this.numeros[i] / this.numeros[i+1];
-                    }else{
-                        this.resultadoParcial /= this.numeros[i+1];
-                    }
-                }
-            }
-            i++;
-            sinal = this.sinais[i];
-        }
-        resultadoFinal = Double.toString(resultadoParcial);*/
     }
 
     private void empurraNumeros(int constante) {

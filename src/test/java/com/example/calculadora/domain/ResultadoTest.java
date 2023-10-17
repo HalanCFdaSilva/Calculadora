@@ -17,7 +17,7 @@ public class ResultadoTest {
     }
 
     @Test
-    public void calculaValor(){
+    public void calculaValorComInicialPositivo(){
         Resultado resultado = new Resultado();
         String equacao = "55+88x66÷2";
         resultado.pegaNumeros(equacao);
