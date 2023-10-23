@@ -87,59 +87,18 @@ public class BotaoList {
         return botoes;
     }
 
-    public String aoClicarEmUmBotao(TextField textArea){
+    public String aoClicarEmUmBotao(TextArea textArea){
 
        this.botoes.forEach(botao ->
                botao.getBotao().setOnAction(actionEvent -> {
 
-                   if(botao.getBotao().getText() != "="){
-                       textArea.setText(this.acrescentarNaEquacao(botao, textArea));
+                   textArea.setText(botao.aoClicar(textArea,this.resultado));
+               }));
 
-                   }else {
-                       String equacao = textArea.getText();
-                       resultado.pegaNumeros(equacao);
-                       resultado.calcular();
-                       textArea.setText("");
-
-
-                   }
-
-               }
-
-               ));
-       return textArea.getText();
+                  return textArea.getText();
     }
 
-    private String acrescentarNaEquacao(Botao botao, TextField textArea) {
-        if ( this.verificaSeEOperador(botao, textArea)){
-            System.out.println("botao clicado");
-            String textoNovo = textArea.getText() + botao.getBotao().getText();
-            return textoNovo;
-        }
-        else {
-            System.out.println("botao clicado");
-            String textoNovo = textArea.getText() + botao.getBotao().getText();
-            return textoNovo;
-        }
-    }
 
-    private boolean verificaSeEOperador(Botao botao, TextField textArea) {
-
-        if(botao.getBotao().getText().equals("+") || botao.getBotao().getText().equals("-") ||
-                botao.getBotao().getText().equals("x") || botao.getBotao().getText().equals("÷")){
-            return this.verificaSeOperadorEValido(textArea, botao);
-        }
-        return false;
-    }
-    private boolean verificaSeOperadorEValido(TextField textArea , Botao botao){
-        if (textArea.getText().length() != 0 || botao.getBotao().getText().equals("-")) {
-            if (!(textArea.getText().endsWith("+") || textArea.getText().endsWith("-") ||
-                    textArea.getText().endsWith("x") || textArea.getText().endsWith("÷"))) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 
 }

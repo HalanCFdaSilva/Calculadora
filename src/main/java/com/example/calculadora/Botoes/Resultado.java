@@ -5,56 +5,49 @@ import java.util.ArrayList;
 
 public class Resultado {
 
-    private ArrayList<Double> numeros;
-    private ArrayList<String> sinais;
-    private  Double resultadoParcial;
+    private final ArrayList<Double> numeros;
+    private final ArrayList<String> sinais;
     private String resultadoFinal;
 
 
+
     public Resultado() {
-        this.numeros = new ArrayList<Double>();
-        this.sinais = new ArrayList<String>();
+        this.numeros = new ArrayList<>();
+        this.sinais = new ArrayList<>();
         this.sinais.add("");
-        this.resultadoParcial = 0.0;
         this.resultadoFinal = "";
     }
 
     public void pegaNumeros(String equacao){
-        int separacao = 0;
-        int inicioSeparacao = 0;
-        String proximaOperacao = "";
         while (equacao.contains("+")||equacao.contains("x")||
                 equacao.contains("-")||equacao.contains("÷")){
 
-
             if(equacao.startsWith("-")){
-
                 this.sinais.set(0, "-");
                 equacao = equacao.substring(equacao.indexOf("-") + 1);
-                proximaOperacao = verificaProximoOperador(equacao);
-                separacao = equacao.indexOf(proximaOperacao);
-                String numeroRetirado = equacao.substring(inicioSeparacao,separacao);
-                this.numeros.add(Double.parseDouble(numeroRetirado));
-                this.sinais.add(String.valueOf(equacao.charAt(separacao)));
-                equacao = equacao.substring(separacao + 1);
+                equacao = this.retiraNumeroESinal(equacao);
             }
 
+            equacao = this.retiraNumeroESinal(equacao);
 
-                proximaOperacao = verificaProximoOperador(equacao);
-                separacao = equacao.indexOf(proximaOperacao);
-                String numeroRetirado = equacao.substring(inicioSeparacao,separacao);
-                this.numeros.add(Double.parseDouble(numeroRetirado));
-                this.sinais.add(String.valueOf(equacao.charAt(separacao)));
-                equacao = equacao.substring(separacao + 1);
-
-
-            equacao.startsWith("fim");
         }
-        equacao.startsWith("saiu");
+
         this.numeros.add(Double.parseDouble(equacao));
 
+        System.out.println(this.numeros.toString());
+        System.out.println(this.sinais.toString());
 
 
+
+    }
+
+    private String retiraNumeroESinal(String equacao){
+        String proximaOperacao = verificaProximoOperador(equacao);
+        int separacao = equacao.indexOf(proximaOperacao);
+        String numeroRetirado = equacao.substring(0,separacao);
+        this.numeros.add(Double.parseDouble(numeroRetirado));
+        this.sinais.add(String.valueOf(equacao.charAt(separacao)));
+        return equacao.substring(separacao + 1);
     }
     private String verificaProximoOperador(String equacao) {
 
@@ -109,9 +102,9 @@ public class Resultado {
 
         if(this.sinais.get(0).equals("-")){
             this.numeros.set(0,-this.numeros.get(0));
-            System.out.println(this.sinais.get(0));
         }
         this.sinais.remove(0);
+        System.out.println(this.sinais.toString());
         
 
         for (int i = 0; i<this.numeros.size();i++){
@@ -121,52 +114,58 @@ public class Resultado {
         }
 
        //MULTIPLICACAO
-        for (int i = 0; i<this.sinais.size();i++){
-            if (this.sinais.get(i).equals("x")){
-                System.out.println(this.numeros.get(i) +"*"+this.numeros.get(i+1)+ "="+ this.numeros.get(i) * this.numeros.get(i+1));
+        while (this.sinais.contains("x")) {
+            for (int i = 0; i < this.sinais.size(); i++) {
+                if (this.sinais.get(i).equals("x")) {
+                    this.numeros.set(i, this.numeros.get(i) * this.numeros.get(i + 1));
+                    this.empurraNumeros(i);
 
-                this.numeros.set(i,this.numeros.get(i) * this.numeros.get(i+1));
-                this.empurraNumeros(i);
-
+                }
             }
         }
 
 
         //DIVISAO
-        for (int i = 0; i<this.sinais.size();i++){
-            if (this.sinais.get(i).equals("÷")){
-                System.out.println(this.numeros.get(i) +"/"+this.numeros.get(i+1)+ "="+ this.numeros.get(i) / this.numeros.get(i+1));
-                this.numeros.set(i,this.numeros.get(i) / this.numeros.get(i+1));
-                this.empurraNumeros(i);
+
+        while(this.sinais.contains("÷")){
+            for (int i = 0; i<this.sinais.size();i++){
+                if (this.sinais.get(i).equals("÷")){
+                    this.numeros.set(i,this.numeros.get(i) / this.numeros.get(i+1));
+                    this.empurraNumeros(i);
 
 
+                }
             }
         }
 
+
         //SOMA
-        for (int i = 0; i<this.sinais.size();i++){
-            if (this.sinais.get(i).equals("+")){
-                System.out.println(this.numeros.get(i) +"+"+this.numeros.get(i+1)+ "="+ (this.numeros.get(i) + this.numeros.get(i+1)));
+        while (this.sinais.contains("+")){
+            for (int i = 0; i<this.sinais.size();i++){
+                if (this.sinais.get(i).equals("+")){
+                    this.numeros.set(i,this.numeros.get(i) + this.numeros.get(i+1));
+                    this.empurraNumeros(i);
+                    System.out.println(this.numeros.get(0));
 
-                this.numeros.set(i,this.numeros.get(i) + this.numeros.get(i+1));
-                this.empurraNumeros(i);
-                System.out.println(this.numeros.get(i));
-
+                }
             }
         }
 
         //SUBTRACAO
-        for (int i = 0; i<this.sinais.size();i++){
-            if (this.sinais.get(i).equals("-")){
-                System.out.println(this.numeros.get(i) +"-"+this.numeros.get(i+1)+ "="+ (this.numeros.get(i) - this.numeros.get(i+1)));
-
-                this.numeros.set(i,this.numeros.get(i) - this.numeros.get(i+1));
-                this.empurraNumeros(i);
-                System.out.println(this.numeros.get(i) );
+        while (this.sinais.contains("-")){
+            System.out.println("entrou");
+            for (int i = 0; i<this.sinais.size();i++){
+                if (this.sinais.get(i).equals("-")){
+                    this.numeros.set(i,this.numeros.get(i) - this.numeros.get(i+1));
+                    this.empurraNumeros(i);
+                }
             }
         }
 
+
+        System.out.println(this.numeros.toString());
         this.resultadoFinal = this.numeros.get(0).toString();
+
 
     }
 
@@ -176,6 +175,7 @@ public class Resultado {
             this.numeros.set(i,this.numeros.get(i+1));
         }
         this.sinais.remove(constante);
+        this.numeros.remove(this.numeros.size()-1);
     }
 
     private String getsinais() {
@@ -184,13 +184,6 @@ public class Resultado {
 
     public String getNumeros() {
 
-      /*  String numeros = "[";
-        for (int i = 0;i < 21;i++){
-            if (this.numeros[i] != null)
-                numeros += this.numeros.get(i) + ",";
-
-        }
-        numeros += "]";*/
        return this.numeros.toString();
     }
 

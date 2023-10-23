@@ -37,4 +37,54 @@ public class ResultadoTest {
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
     }
+
+    @Test
+    public void somaNumerosNegativos(){
+        Resultado resultado = new Resultado();
+        String equacao ="-55-88";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(-55-88);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+    }
+
+    @Test
+    public void somaMultiplosNumerosPositivos(){
+        Resultado resultado = new Resultado();
+        String equacao ="55+88+66";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(55+88+66);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+    }
+
+    @Test
+    public void MultiplicaMultiplosNumeros(){
+        Resultado resultado = new Resultado();
+        String equacao ="55x88x66";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(55*88*66);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+    }
+
+    @Test
+    public void SubtraiMultiplosNumeros(){
+        Resultado resultado = new Resultado();
+        String equacao ="55÷88÷66";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(55/88/66);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+    }
+
+    @Test
+    public void SubtracaoNumerosNegativos(){
+        Resultado resultado = new Resultado();
+        String equacao ="-88÷55";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(-88/55);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+    }
 }
