@@ -11,8 +11,10 @@ public class ResultadoTest {
         Resultado resultado = new Resultado();
         String equacao = "55+88x66÷2";
         resultado.pegaNumeros(equacao);
-        String resultadoEsperado = "[55.0, 88.0, 66.0, 2.0]";
+        String resultadoEsperado = "[0.0, 55.0, 88.0, 66.0, 2.0]";
+        String sinaisEsperado = "[+, +, x, ÷]";
         Assertions.assertEquals(resultadoEsperado, resultado.getNumeros());
+        Assertions.assertEquals(sinaisEsperado, resultado.getSinais());
 
     }
 
@@ -74,7 +76,7 @@ public class ResultadoTest {
         String equacao ="55÷88÷66";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(55/88/66);
+        String resultadoEsperado = Double.toString(55.0/88.0/66.0);
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
 
@@ -84,7 +86,41 @@ public class ResultadoTest {
         String equacao ="-88÷55";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-88/55);
+        String resultadoEsperado = Double.toString(-88.0/55.0);
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
+
+    @Test
+    public void multiplicacaoComSegundoNumeroNegativo(){
+        Resultado resultado = new Resultado();
+        String equacao ="1x-1";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(1*-1);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+
+    }
+
+    @Test
+    public void DivisaoComSegundoNumeroNegativo(){
+        Resultado resultado = new Resultado();
+        String equacao ="1+1÷-1";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(1+1/-1);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+
+    }
+
+    @Test
+    public void DivisaoComMultiplicacaoENumeroNegativo(){
+        Resultado resultado = new Resultado();
+        String equacao ="1x-1÷-1";
+        resultado.pegaNumeros(equacao);
+        resultado.calcular();
+        String resultadoEsperado = Double.toString(1*-1/-1);
+        Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+
+    }
+
 }

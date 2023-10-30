@@ -1,5 +1,6 @@
 package com.example.calculadora.Botoes;
 
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -9,6 +10,8 @@ import java.util.List;
 public class BotaoList {
     private ArrayList<Botao> botoes;
     Resultado resultado;
+
+    Label label;
 
     public BotaoList() {
         this.botoes = new ArrayList<>();
@@ -79,7 +82,15 @@ public class BotaoList {
         botaoZero.posicionarBotao(25,150);
         botoes.add(botaoZero);
 
+        Botao botaoReset = new Botao("CE");
+        botaoReset.posicionarBotao(0,50);
+        botoes.add(botaoReset);
+
         this.resultado = new Resultado();
+
+        this.label = new Label();
+        label.setLayoutX(150);
+        label.setLayoutY(100);
 
     }
 
@@ -87,12 +98,28 @@ public class BotaoList {
         return botoes;
     }
 
+    public Label getLabel() {
+        return label;
+    }
+
     public String aoClicarEmUmBotao(TextArea textArea){
 
        this.botoes.forEach(botao ->
                botao.getBotao().setOnAction(actionEvent -> {
 
-                   textArea.setText(botao.aoClicar(textArea,this.resultado));
+                   if (botao.getBotao().getText() == "="){
+                       String equacao = textArea.getText();
+                       resultado.pegaNumeros(equacao);
+                       resultado.calcular();
+                       textArea.setText("");
+
+                       label.setText(resultado.getResultadoFinal());
+
+                   }else {
+                       textArea.setText(botao.aoClicar(textArea));
+                   }
+
+
                }));
 
                   return textArea.getText();

@@ -3,8 +3,9 @@ package com.example.calculadora.Botoes;
 
 
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+
 
 
 public class Botao {
@@ -26,14 +27,12 @@ public class Botao {
         this.botao.setLayoutY(posicaoColuna);
     }
 
-    public String aoClicar(TextArea textArea, Resultado resultado){
-        if(this.getBotao().getText() != "="){
+
+    public String aoClicar(TextArea textArea){
+        if(this.getBotao().getText() != "CE"){
             textArea.setText(this.acrescentarNaEquacao( textArea));
 
         }else {
-            String equacao = textArea.getText();
-            resultado.pegaNumeros(equacao);
-            resultado.calcular();
             textArea.setText("");
 
 
@@ -81,6 +80,9 @@ public class Botao {
             if (textArea.getText().endsWith("+") || textArea.getText().endsWith("-") ||
                     textArea.getText().endsWith("x") || textArea.getText().endsWith("÷")) {
                 System.out.println("passou2");
+                if (this.getBotao().getText() == "-" && !textArea.getText().endsWith("-")){
+                    return true;
+                }
                 return false;
             }
         System.out.println("nao passou");
