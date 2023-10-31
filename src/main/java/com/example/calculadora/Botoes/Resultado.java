@@ -25,8 +25,6 @@ public class Resultado {
         while (equacao.contains("+")||equacao.contains("x")||
                 equacao.contains("-")||equacao.contains("÷")){
 
-            System.out.println("------------------------------");
-            System.out.println(equacao);
             int separacaoInicial = verificaProximoOperador(equacao);
             if (!equacao.startsWith(proximoOperador)){
                 String numeroRetirado = equacao.substring(0,separacaoInicial);
@@ -39,7 +37,7 @@ public class Resultado {
 
 
         }
-        System.out.println("--------------------------------------------");
+
     }
 
     private String retiraNumeroESinal(String equacao){
@@ -93,10 +91,8 @@ public class Resultado {
 
                 }else {
                     equacao =equacao.substring(separacao+1);
-                    System.out.println(equacao);
                     separacao = verificaProximoOperador(equacao);
                     numeroRetirado = equacao.substring(0,separacao);
-                    System.out.println(numeroRetirado);
                     this.numeros.add(Double.parseDouble(numeroRetirado));
                     this.sinais.add("x");
                     if (!equacao.equals("")){
@@ -110,14 +106,6 @@ public class Resultado {
                 if (comNegativo){
                     equacao =equacao.substring(separacao+1);
                     this.sinais.add("÷");
-                    System.out.println("entrou em com negativo");
-                    /*equacao =equacao.substring(separacao+1);
-                    numeroRetirado = equacao.substring(0,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado)*-1);
-                    this.sinais.add("÷");
-                    separacao = verificaProximoOperador(equacao);
-                    equacao =equacao.substring(separacao);
-                    this.comNegativo = false;*/
                 }else {
                     equacao =equacao.substring(separacao+1);
                     separacao = verificaProximoOperador(equacao);
@@ -131,24 +119,8 @@ public class Resultado {
                 break;
         }
 
-        System.out.println(this.numeros.toString());
-        System.out.println(this.sinais.toString());
         return equacao;
 
-
-
-        /*else {
-            System.out.println("nao entrou");
-            String numeroRetirado = equacao.substring(0,separacao);
-            this.numeros.add(Double.parseDouble(numeroRetirado));
-            this.sinais.add(String.valueOf(equacao.charAt(separacao)));
-            System.out.println(this.numeros.toString());
-            System.out.println(this.sinais.toString());
-
-            return equacao.substring(separacao + 1);
-
-
-        }*/
 
 
     }

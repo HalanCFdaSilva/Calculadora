@@ -7,6 +7,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 
@@ -15,10 +16,10 @@ public class Calculadora extends Application {
 
     @Override
     public void start(Stage stage) {
-        Group group = new Group();
+        Pane group = new Pane();
         Scene scene = new Scene(group, 250, 300);
-        scene.getStylesheets().add(getClass().
-                getResource("properties.css").toExternalForm());
+        scene.getStylesheets().add(this.getClass().getResource("properties.css").toExternalForm());
+
 
 
         TextArea textArea = new TextArea();
