@@ -10,11 +10,34 @@ import javafx.scene.control.TextArea;
 public class Botao {
 
     private final Button botao;
+    
     public  Botao (String nomeBotao){
         this.botao = new Button();
         this.botao.setText(nomeBotao);
-        this.botao.setId("botao" + nomeBotao);
+        this.setIdBotao(nomeBotao);
 
+    }
+    
+    public void setIdBotao(String nomeBotao){
+
+    switch(nomeBotao){
+        
+        case "+":
+            this.getBotao().SetId("botaoSoma");
+            break;
+        case "÷":
+            this.getBotao().SetId("botaoDivisao");
+            break;
+        case "x":
+            this.getBotao().SetId("botaoMultiplicacao");
+            break;
+        case "-":
+            this.getBotao().SetId("botaoSubtracao");
+            break;
+        default:
+            this.getBotao().SetId("botao" + nomeBotao);
+            break;
+      }
     }
 
     public Button getBotao() {
