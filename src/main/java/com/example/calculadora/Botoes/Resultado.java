@@ -30,8 +30,6 @@ public class Resultado {
                 String numeroRetirado = equacao.substring(0,separacaoInicial);
                 this.numeros.add(Double.parseDouble(numeroRetirado));
                 this.sinais.add("+");
-                equacao.substring(separacaoInicial);
-                System.out.println(equacao);
             }
             equacao = this.retiraNumeroESinal(equacao);
 
@@ -45,78 +43,38 @@ public class Resultado {
 
 
         int separacao = verificaProximoOperador(equacao);
-        switch (proximoOperador){
-            case "-":
-                if (comNegativo){
-                    System.out.println("entrou em com negativo");
-                    equacao =equacao.substring(separacao+1);
-                    separacao = verificaProximoOperador(equacao);
-                    String numeroRetirado = equacao.substring(0,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado)*-1);
-                    if (!equacao.equals("")){
-                        equacao =equacao.substring(separacao);
-                    }
-                    comNegativo = false;
+        equacao =equacao.substring(separacao+1);
 
-                }else {
-                    equacao =equacao.substring(separacao+1);
-                    separacao = verificaProximoOperador(equacao);
-                    String numeroRetirado = equacao.substring(0,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado)*-1);
-                    this.sinais.add("+");
-                    if (!equacao.equals("")) {
-                        equacao = equacao.substring(separacao);
-                    }
+        if (!this.proximoOperador.equals("-")){
 
+            if (this.comNegativo && !this.proximoOperador.equals("+")){
+                this.sinais.add(this.proximoOperador);
 
-                }
-                break;
-
-
-            case "+":
-                equacao =equacao.substring(separacao+1);
+            }else{
+                this.sinais.add(this.proximoOperador);
                 separacao = verificaProximoOperador(equacao);
                 String numeroRetirado = equacao.substring(0,separacao);
                 this.numeros.add(Double.parseDouble(numeroRetirado));
-                this.sinais.add("+");
+                this.comNegativo = false;
                 if (!equacao.equals("")){
                     equacao =equacao.substring(separacao);
                 }
-                break;
 
-            case "x":
-                if (comNegativo){
-                    equacao =equacao.substring(separacao+1);
-                    this.sinais.add("x");
 
-                }else {
-                    equacao =equacao.substring(separacao+1);
-                    separacao = verificaProximoOperador(equacao);
-                    numeroRetirado = equacao.substring(0,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado));
-                    this.sinais.add("x");
-                    if (!equacao.equals("")){
-                        equacao =equacao.substring(separacao);
-                    }
-                }
+            }
 
-                break;
 
-            case "÷":
-                if (comNegativo){
-                    equacao =equacao.substring(separacao+1);
-                    this.sinais.add("÷");
-                }else {
-                    equacao =equacao.substring(separacao+1);
-                    separacao = verificaProximoOperador(equacao);
-                    numeroRetirado = equacao.substring(0,separacao);
-                    this.numeros.add(Double.parseDouble(numeroRetirado));
-                    this.sinais.add("÷");
-                    if (!equacao.equals("")){
-                        equacao =equacao.substring(separacao);
-                    }
-                }
-                break;
+        }else{
+            if (!this.comNegativo){
+                this.sinais.add("+");
+            }
+            separacao = verificaProximoOperador(equacao);
+            String numeroRetirado = equacao.substring(0,separacao);
+            this.numeros.add(Double.parseDouble(numeroRetirado )* -1);
+            this.comNegativo = false;
+            if (!equacao.equals("")){
+                equacao =equacao.substring(separacao);
+            }
         }
 
         return equacao;
@@ -124,6 +82,8 @@ public class Resultado {
 
 
     }
+
+
     private int verificaProximoOperador(String equacao) {
 
 
@@ -194,8 +154,8 @@ public class Resultado {
 
         }
         System.out.println(proximoOperador);
-        int posicaoOperador = 0;
-        if (proximoOperador == "-1")
+        int posicaoOperador;
+        if (proximoOperador.equals("-1") )
             posicaoOperador = equacao.length();
         else
             posicaoOperador= equacao.indexOf(proximoOperador);
@@ -208,22 +168,12 @@ public class Resultado {
 
 
 
-        System.out.println(this.sinais.toString());
-        
-
-        for (int i = 0; i<this.numeros.size();i++){
-        //    if (this.sinais.get(i) =="("){
-
-         //   }
-        }
-
        //MULTIPLICACAO
         while (this.sinais.contains("x")) {
             for (int i = 0; i < this.sinais.size(); i++) {
                 if (this.sinais.get(i).equals("x")) {
                     this.numeros.set(i, this.numeros.get(i) * this.numeros.get(i + 1));
                     this.empurraNumeros(i);
-                    System.out.println(this.numeros.toString() + " " + this.sinais.toString());
 
                 }
             }
@@ -237,7 +187,6 @@ public class Resultado {
                 if (this.sinais.get(i).equals("÷")){
                     this.numeros.set(i,this.numeros.get(i) / this.numeros.get(i+1));
                     this.empurraNumeros(i);
-                    System.out.println(this.numeros.toString() + " " + this.sinais.toString());
                 }
             }
         }
@@ -249,14 +198,13 @@ public class Resultado {
                 if (this.sinais.get(i).equals("+")){
                     this.numeros.set(i,this.numeros.get(i) + this.numeros.get(i+1));
                     this.empurraNumeros(i);
-                    System.out.println(this.numeros.toString() + " " + this.sinais.toString());
+
 
                 }
             }
         }
 
 
-        System.out.println(this.numeros.toString());
         this.resultadoFinal = this.numeros.get(0).toString();
         this.numeros.clear();
         this.sinais.clear();
@@ -273,9 +221,6 @@ public class Resultado {
         this.numeros.remove(this.numeros.size()-1);
     }
 
-    private String getsinais() {
-        return this.sinais.toString();
-    }
 
     public String getNumeros() {
 

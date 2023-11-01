@@ -3,14 +3,13 @@ package com.example.calculadora.Botoes;
 
 
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 
 
 
 public class Botao {
 
-    private Button botao;
+    private final Button botao;
     public  Botao (String nomeBotao){
         this.botao = new Button();
         this.botao.setText(nomeBotao);
@@ -29,7 +28,7 @@ public class Botao {
 
 
     public String aoClicar(TextArea textArea){
-        if(this.getBotao().getText() != "CE"){
+        if(!this.getBotao().getText().equals("CE")){
             textArea.setText(this.acrescentarNaEquacao( textArea));
 
         }else {
@@ -43,34 +42,31 @@ public class Botao {
     }
 
     private String acrescentarNaEquacao( TextArea textArea) {
-        if ( this.verificaSeEOperador( textArea)){
+        if ( this.verificaSeEOperador()){
 
             if (verificaSeOperadorEValido(textArea)){
-                if(textArea.getLength() ==0 && this.botao.getText() == "-"){
+                if(textArea.getLength() ==0 && this.botao.getText().equals("-")){
                     System.out.println("nova equacao");
-                    String textoNovo = textArea.getText() + this.getBotao().getText();
-                    return textoNovo;
+                    return textArea.getText() + this.getBotao().getText();
+
                 }
                 if (textArea.getLength() != 0){
                     System.out.println("velha equacao");
-                    String textoNovo = textArea.getText() + this.getBotao().getText();
-                    return textoNovo;
+                    return textArea.getText() + this.getBotao().getText();
                 }
             }
 
-            System.out.println(textArea.getText());
 
            return textArea.getText();
         }
         else {
 
-            System.out.println("pulou tudo");
-            String textoNovo = textArea.getText() + this.getBotao().getText();
-            return textoNovo;
+            return textArea.getText() + this.getBotao().getText();
+
         }
     }
 
-    private boolean verificaSeEOperador( TextArea textArea) {
+    private boolean verificaSeEOperador( ) {
 
         return this.getBotao().getText().equals("+") || this.getBotao().getText().equals("-") ||
                 this.getBotao().getText().equals("x") || this.getBotao().getText().equals("÷");
@@ -80,12 +76,8 @@ public class Botao {
             if (textArea.getText().endsWith("+") || textArea.getText().endsWith("-") ||
                     textArea.getText().endsWith("x") || textArea.getText().endsWith("÷")) {
                 System.out.println("passou2");
-                if (this.getBotao().getText() == "-" && !textArea.getText().endsWith("-")){
-                    return true;
-                }
-                return false;
+                return this.getBotao().getText().equals("-") && !textArea.getText().endsWith("-");
             }
-        System.out.println("nao passou");
         return true;
     }
 

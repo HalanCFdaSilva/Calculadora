@@ -35,7 +35,7 @@ public class ResultadoTest {
         String equacao = "-55+88x66÷2";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-55+88*66/2);
+        String resultadoEsperado = Double.toString(-55+ (double) (88 * 66) /2);
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
     }
@@ -96,7 +96,7 @@ public class ResultadoTest {
         String equacao ="1x-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(1*-1);
+        String resultadoEsperado = Double.toString(-1);
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
     }
