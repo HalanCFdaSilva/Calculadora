@@ -1,6 +1,6 @@
 package com.example.calculadora.domain;
 
-import com.example.calculadora.Botoes.Resultado;
+import com.example.calculadora.botoes.solucao.Resultado;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

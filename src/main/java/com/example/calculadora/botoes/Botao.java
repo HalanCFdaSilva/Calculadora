@@ -1,4 +1,4 @@
-package com.example.calculadora.Botoes;
+package com.example.calculadora.botoes;
 
 
 
@@ -23,19 +23,19 @@ public class Botao {
     switch(nomeBotao){
         
         case "+":
-            this.getBotao().SetId("botaoSoma");
+            this.getBotao().setId("botaoSoma");
             break;
         case "÷":
-            this.getBotao().SetId("botaoDivisao");
+            this.getBotao().setId("botaoDivisao");
             break;
         case "x":
-            this.getBotao().SetId("botaoMultiplicacao");
+            this.getBotao().setId("botaoMultiplicacao");
             break;
         case "-":
-            this.getBotao().SetId("botaoSubtracao");
+            this.getBotao().setId("botaoSubtracao");
             break;
         default:
-            this.getBotao().SetId("botao" + nomeBotao);
+            this.getBotao().setId("botao" + nomeBotao);
             break;
       }
     }

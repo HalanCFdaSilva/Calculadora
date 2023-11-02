@@ -1,7 +1,7 @@
 package com.example.calculadora;
 
 
-import com.example.calculadora.Botoes.BotaoList;
+import com.example.calculadora.botoes.BotaoList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;

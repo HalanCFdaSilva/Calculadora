@@ -1,5 +1,6 @@
-package com.example.calculadora.Botoes;
+package com.example.calculadora.botoes;
 
+import com.example.calculadora.botoes.solucao.Resultado;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
