@@ -34,6 +34,12 @@ public class Botao {
         case "-":
             this.getBotao().setId("botaoSubtracao");
             break;
+        case "=":
+            this.getBotao().setId("botaoSolucao");
+            break;
+        case "CE":
+            this.getBotao().setId("botaoApagar");
+            break;
         default:
             this.getBotao().setId("botao" + nomeBotao);
             break;
@@ -70,12 +76,12 @@ public class Botao {
             if (verificaSeOperadorEValido(textArea)){
                 if(textArea.getLength() ==0 && this.botao.getText().equals("-")){
                     System.out.println("nova equacao");
-                    return textArea.getText() + this.getBotao().getText();
+                    return textArea.getText() + this.getBotao().getText().strip();
 
                 }
                 if (textArea.getLength() != 0){
                     System.out.println("velha equacao");
-                    return textArea.getText() + this.getBotao().getText();
+                    return textArea.getText() + this.getBotao().getText().strip();
                 }
             }
 
@@ -84,7 +90,7 @@ public class Botao {
         }
         else {
 
-            return textArea.getText() + this.getBotao().getText();
+            return textArea.getText() + this.getBotao().getText().strip();
 
         }
     }
@@ -105,7 +111,8 @@ public class Botao {
     }
 
 
-
-
+    public void padronizaTamanhoBotao(int largura) {
+        this.getBotao().setMinWidth(largura);
+    }
 }
 

@@ -1,6 +1,7 @@
 package com.example.calculadora.botoes;
 
-import com.example.calculadora.botoes.solucao.Resultado;
+
+import com.example.calculadora.solucao.Resultado;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import java.util.ArrayList;
@@ -8,7 +9,7 @@ import java.util.List;
 
 public class BotaoList {
     private final ArrayList<Botao>  botoes;
-    Resultado resultado;
+
 
     Label label;
 
@@ -16,80 +17,89 @@ public class BotaoList {
         this.botoes = new ArrayList<>();
 
         Botao botaoSoma = new Botao("+");
-        botaoSoma.posicionarBotao(25,50);
+        botaoSoma.posicionarBotao(64,80);
         botoes.add(botaoSoma);
 
         Botao botaoSubtracao = new Botao("-");
-        botaoSubtracao.posicionarBotao(50,50);
+        botaoSubtracao.posicionarBotao(128,80);
         botoes.add(botaoSubtracao);
 
         Botao botaoMultiplicacao = new Botao("x");
-        botaoMultiplicacao.posicionarBotao(75,50);
+        botaoMultiplicacao.posicionarBotao(192,148);
         botoes.add(botaoMultiplicacao);
 
         Botao botaoDivisao = new Botao("÷");
-        botaoDivisao.posicionarBotao(100,50);
+        botaoDivisao.posicionarBotao(192,80);
         botoes.add(botaoDivisao);
 
 
         Botao botaoSolucao = new Botao("=");
-        botaoSolucao.posicionarBotao(125,50);
+        botaoSolucao.posicionarBotao(192,216);
+        botaoSolucao.getBotao().setMinHeight(203);
         botoes.add(botaoSolucao);
 
 
         Botao botaoUm = new Botao("1");
-        botaoUm.posicionarBotao(50,150);
+        botaoUm.posicionarBotao(0,284);
         botoes.add(botaoUm);
 
 
         Botao botaoDois = new Botao("2");
-        botaoDois.posicionarBotao(75,150);
+        botaoDois.posicionarBotao(64,284);
         botoes.add(botaoDois);
 
 
         Botao botaoTres = new Botao("3");
-        botaoTres.posicionarBotao(100,150);
+        botaoTres.posicionarBotao(128,284);
         botoes.add(botaoTres);
 
 
         Botao botaoQuatro = new Botao("4");
-        botaoQuatro.posicionarBotao(125,150);
+        botaoQuatro.posicionarBotao(0,216);
         botoes.add(botaoQuatro);
 
 
         Botao botaoCinco = new Botao("5");
-        botaoCinco.posicionarBotao(25,100);
+        botaoCinco.posicionarBotao(64,216);
         botoes.add(botaoCinco);
 
         Botao botaoSeis = new Botao("6");
-        botaoSeis.posicionarBotao(50,100);
+        botaoSeis.posicionarBotao(128,216);
         botoes.add(botaoSeis);
 
         Botao botaoSete = new Botao("7");
-        botaoSete.posicionarBotao(75,100);
+        botaoSete.posicionarBotao(0,148);
         botoes.add(botaoSete);
 
         Botao botaoOito = new Botao("8");
-        botaoOito.posicionarBotao(100,100);
+        botaoOito.posicionarBotao(64,148);
         botoes.add(botaoOito);
 
         Botao botaoNove = new Botao("9");
-        botaoNove.posicionarBotao(125,100);
+        botaoNove.posicionarBotao(128,148);
         botoes.add(botaoNove);
 
         Botao botaoZero = new Botao("0");
-        botaoZero.posicionarBotao(25,150);
+        botaoZero.posicionarBotao(64,352);
+
         botoes.add(botaoZero);
 
+        Botao botaoDot = new Botao(",");
+        botaoDot.posicionarBotao(0,352);
+        botoes.add(botaoDot);
+        Botao botaoNada = new Botao("");
+        botaoNada.posicionarBotao(128,352);
+        botoes.add(botaoNada);
+
         Botao botaoReset = new Botao("CE");
-        botaoReset.posicionarBotao(0,50);
+        botaoReset.posicionarBotao(0,80);
         botoes.add(botaoReset);
 
-        this.resultado = new Resultado();
+        this.botoes.forEach(botao -> botao.padronizaTamanhoBotao(64));
 
         this.label = new Label();
-        label.setLayoutX(150);
-        label.setLayoutY(100);
+        label.setLayoutX(200);
+        label.setLayoutY(60);
 
     }
 
@@ -103,27 +113,25 @@ public class BotaoList {
 
     public String aoClicarEmUmBotao(TextArea textArea){
 
-       this.botoes.forEach(botao ->
-               botao.getBotao().setOnAction(actionEvent -> {
+        Resultado resultado = new Resultado();
+        this.botoes.forEach(botao ->
+                botao.getBotao().setOnAction(actionEvent -> {
 
-                   if (botao.getBotao().getText().equals("=") ){
-                       String equacao = textArea.getText();
-                       resultado.pegaNumeros(equacao);
-                       resultado.calcular();
-                       textArea.setText("");
+                    if (botao.getBotao().getText().equals("=") ){
+                        String equacao = textArea.getText();
+                        resultado.pegaNumeros(equacao);
+                        resultado.calcular();
+                        textArea.setText("");
+                        label.setText(resultado.getResultadoFinal());
 
-                       label.setText(resultado.getResultadoFinal());
+                    }else {
+                        textArea.setText(botao.aoClicar(textArea));
 
-                   }else {
-                       textArea.setText(botao.aoClicar(textArea));
-                   }
-
-
-               }));
+                        }
+                    }));
 
                   return textArea.getText();
     }
-
 
 
 

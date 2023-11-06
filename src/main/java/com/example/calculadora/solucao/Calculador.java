@@ -1,4 +1,4 @@
-package com.example.calculadora.botoes.solucao;
+package com.example.calculadora.solucao;
 
 import java.util.ArrayList;
 
@@ -14,6 +14,9 @@ public class Calculador {
     }
 
     public String run(){
+        System.out.println("------------------");
+        System.out.println(this.numeros.toString());
+        System.out.println(this.sinais.toString());
 
 
 
@@ -46,21 +49,27 @@ public class Calculador {
     private void multiplicar() {
         for (int i = 0; i < this.sinais.size(); i++) {
             if (this.sinais.get(i).equals("x")) {
+
                 this.numeros.set(i, this.numeros.get(i) * this.numeros.get(i + 1));
                 this.empurraNumeros(i);
             }
         }
     }
     private void dividir() {
+
         for (int i = 0; i<this.sinais.size();i++){
             if (this.sinais.get(i).equals("÷")){
-                this.numeros.set(i,this.numeros.get(i) / this.numeros.get(i+1));
+
+                this.numeros.set(i,(this.numeros.get(i)*-1) / (this.numeros.get(i+1)*-1));
                 this.empurraNumeros(i);
+
             }
         }
     }
     private void somar() {
+
         for (int i = 0; i<this.sinais.size();i++){
+
             if (this.sinais.get(i).equals("+")){
                 this.numeros.set(i,this.numeros.get(i) + this.numeros.get(i+1));
                 this.empurraNumeros(i);

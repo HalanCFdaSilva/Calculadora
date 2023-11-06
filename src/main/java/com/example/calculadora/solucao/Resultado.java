@@ -1,4 +1,4 @@
-package com.example.calculadora.botoes.solucao;
+package com.example.calculadora.solucao;
 
 
 import java.util.ArrayList;
@@ -9,13 +9,11 @@ public class Resultado {
     private final ArrayList<String> sinais;
     private String resultadoFinal;
     private String equacao;
-
-
+    private boolean primeiraVezEquacao;
 
 
     public Resultado() {
         this.numeros = new ArrayList<>();
-        this.numeros.add(Double.parseDouble("0"));
         this.sinais = new ArrayList<>();
         this.resultadoFinal = "";
 
@@ -23,41 +21,45 @@ public class Resultado {
 
     public void pegaNumeros(String equacaoNova){
         ColetorOperador coletor = new ColetorOperador();
-        this.equacao = equacaoNova;
+        this.equacao = equacaoNova.replace(",",".");
+        this.primeiraVezEquacao = true;
+        this.numeros.add(Double.parseDouble("0"));
 
         while (equacao.contains("+")||equacao.contains("x")||
                 equacao.contains("-")||equacao.contains("÷")){
 
+
             coletor.verificaProximoOperador(equacao);
             if (!equacao.startsWith(coletor.getProximoOperador())){
-                System.out.println("entrou");
                 String numeroRetirado = equacao.substring(0,coletor.getPosicaoOperador());
                 this.numeros.add(Double.parseDouble(numeroRetirado));
                 this.sinais.add("+");
+            } else if (equacao.startsWith("-") && primeiraVezEquacao) {
+                this.sinais.add("+");
+
             }
 
-            coletor = this.retiraNumeroESinal(coletor);
+            this.retiraNumeroESinal(coletor);
+            primeiraVezEquacao = false;
+
 
 
         }
 
+
+
     }
 
-    private ColetorOperador retiraNumeroESinal(ColetorOperador coletor){
+    private void retiraNumeroESinal(ColetorOperador coletor){
 
-        System.out.println(this.numeros.toString());
-        System.out.println(equacao);
+
 
         coletor.verificaProximoOperador(equacao);
 
         equacao =equacao.substring(coletor.getPosicaoOperador()+1);
-        System.out.println(equacao);
-
-
-        System.out.println(!coletor.getProximoOperador().equals("-"));
 
         if (!coletor.getProximoOperador().equals("-")){
-            if (coletor.getComNegativo() && !coletor.getProximoOperador().equals("+")){
+            if (coletor.getComNegativo()){
 
                 this.sinais.add(coletor.getProximoOperador());
 
@@ -70,7 +72,7 @@ public class Resultado {
                 String numeroRetirado = equacao.substring(0,coletor.getPosicaoOperador());
                 this.numeros.add(Double.parseDouble(numeroRetirado));
                 coletor.setComNegativo(false);
-                if (!equacao.equals("")){
+                if (!equacao.isEmpty()){
                     equacao = equacao.substring(coletor.getPosicaoOperador());
                 }
 
@@ -79,19 +81,19 @@ public class Resultado {
 
 
         }else{
-            if (!coletor.getComNegativo()){
+            if (!coletor.getComNegativo() && !this.primeiraVezEquacao){
                 this.sinais.add("+");
             }
             coletor.verificaProximoOperador(equacao);
             String numeroRetirado = equacao.substring(0,coletor.getPosicaoOperador());
             this.numeros.add(Double.parseDouble(numeroRetirado )* -1);
             coletor.setComNegativo(false);
-            if (!equacao.equals("")){
+            if (!equacao.isEmpty()){
                 equacao =equacao.substring(coletor.getPosicaoOperador());
             }
         }
 
-        return coletor;
+
 
 
 
@@ -118,10 +120,15 @@ public class Resultado {
     }
 
     public String getResultadoFinal() {
-        return resultadoFinal;
+        return resultadoFinal.replace(".",",");
     }
 
     public String getSinais() {
         return this.sinais.toString();
+    }
+
+    public void limpar(){
+        this.sinais.clear();
+        this.numeros.clear();
     }
 }

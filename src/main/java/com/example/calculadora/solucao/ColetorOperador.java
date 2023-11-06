@@ -1,4 +1,4 @@
-package com.example.calculadora.botoes.solucao;
+package com.example.calculadora.solucao;
 
 public class ColetorOperador {
 
@@ -22,10 +22,7 @@ public class ColetorOperador {
         if(equacao.contains("x")){
             posicaoMultiplicacao = equacao.indexOf("x");
 
-            if (equacao.contains("x-")){
 
-                this.comNegativo = true;
-            }
         }
 
 
@@ -33,16 +30,16 @@ public class ColetorOperador {
 
 
 
-        if(equacao.contains("+"))
+        if(equacao.contains("+")){
             posicaoSoma = equacao.indexOf("+");
+
+        }
+
 
         if(equacao.contains("÷")){
             posicaoDivisao = equacao.indexOf("÷");
 
-            if (equacao.contains("÷-")){
 
-                comNegativo = true;
-            }
         }
 
 
@@ -52,6 +49,10 @@ public class ColetorOperador {
             if (posicaoSoma < posicaoMultiplicacao){
                 if (posicaoSoma < posicaoDivisao){
                     proximoOperador = "+";
+                    if (equacao.contains("+-")){
+
+                        comNegativo = true;
+                    }
                 }
             }
         } else {
@@ -61,16 +62,28 @@ public class ColetorOperador {
                     proximoOperador = "-";
                 } else {
                     proximoOperador = "x";
+                    if (equacao.contains("x-")){
+
+                        this.comNegativo = true;
+                    }
 
                 }
             } else {
                 if (posicaoDivisao < posicaoMultiplicacao) {
 
                     proximoOperador = "÷";
+                    if (equacao.contains("÷-")){
+
+                        comNegativo = true;
+                    }
                 } else {
                     if (posicaoMultiplicacao < posicaoDivisao) {
 
                         proximoOperador = "x";
+                        if (equacao.contains("x-")){
+
+                            this.comNegativo = true;
+                        }
                     } else {
                         proximoOperador = "-1";
 

@@ -1,14 +1,24 @@
 .root
 {
 
+
 }
 
 #texto
 {
+	
+
+
+}
+.label{
+    -fx-fill: lawngreen;
+    -fx-label-padding:	2px;
+}
+
+.button{
+
+    -fx-padding: 25px;
 
 
 }
 
-#botao0{
-
-}
