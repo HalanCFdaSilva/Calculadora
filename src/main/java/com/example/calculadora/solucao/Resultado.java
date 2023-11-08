@@ -45,6 +45,10 @@ public class Resultado {
 
 
         }
+        if (primeiraVezEquacao){
+            this.resultadoFinal = equacaoNova;
+
+        }
 
 
 
@@ -127,8 +131,24 @@ public class Resultado {
         return this.sinais.toString();
     }
 
-    public void limpar(){
-        this.sinais.clear();
-        this.numeros.clear();
+
+
+
+    public int verificaSinais(String equacaoNova){
+
+        ArrayList< String> guardaOperacoes = new ArrayList<>();
+
+        ColetorOperador coletor = new ColetorOperador();
+
+        while (equacaoNova.contains("+")||equacaoNova.contains("x")||
+                equacaoNova.contains("-")||equacaoNova.contains("÷")){
+            coletor.verificaProximoOperador(equacaoNova);
+            guardaOperacoes.add(coletor.getProximoOperador());
+            equacaoNova = equacaoNova.substring(coletor.getPosicaoOperador()+1);
+
+
+        }
+        return guardaOperacoes.size();
+
     }
 }

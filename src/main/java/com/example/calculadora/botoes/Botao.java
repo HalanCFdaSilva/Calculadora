@@ -2,6 +2,7 @@ package com.example.calculadora.botoes;
 
 
 
+import com.example.calculadora.solucao.Resultado;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
@@ -20,29 +21,30 @@ public class Botao {
     
     public void setIdBotao(String nomeBotao){
 
-    switch(nomeBotao){
+
+        switch(nomeBotao){
         
-        case "+":
-            this.getBotao().setId("botaoSoma");
-            break;
-        case "÷":
-            this.getBotao().setId("botaoDivisao");
-            break;
-        case "x":
-            this.getBotao().setId("botaoMultiplicacao");
-            break;
-        case "-":
-            this.getBotao().setId("botaoSubtracao");
-            break;
-        case "=":
-            this.getBotao().setId("botaoSolucao");
-            break;
-        case "CE":
-            this.getBotao().setId("botaoApagar");
-            break;
-        default:
-            this.getBotao().setId("botao" + nomeBotao);
-            break;
+            case "+":
+                this.getBotao().setId("botaoSoma");
+                break;
+            case "÷":
+                this.getBotao().setId("botaoDivisao");
+                break;
+            case "x":
+                this.getBotao().setId("botaoMultiplicacao");
+                break;
+            case "-":
+                this.getBotao().setId("botaoSubtracao");
+                break;
+            case "=":
+                this.getBotao().setId("botaoSolucao");
+                break;
+            case "CE":
+                this.getBotao().setId("botaoApagar");
+                break;
+            default:
+                this.getBotao().setId("botao" + nomeBotao);
+                break;
       }
     }
 
@@ -57,8 +59,12 @@ public class Botao {
 
 
     public String aoClicar(TextArea textArea){
+
         if(!this.getBotao().getText().equals("CE")){
             textArea.setText(this.acrescentarNaEquacao( textArea));
+
+
+
 
         }else {
             textArea.setText("");
@@ -71,17 +77,21 @@ public class Botao {
     }
 
     private String acrescentarNaEquacao( TextArea textArea) {
+
+        Resultado resultado = new Resultado();
         if ( this.verificaSeEOperador()){
 
             if (verificaSeOperadorEValido(textArea)){
                 if(textArea.getLength() ==0 && this.botao.getText().equals("-")){
-                    System.out.println("nova equacao");
                     return textArea.getText() + this.getBotao().getText().strip();
 
                 }
                 if (textArea.getLength() != 0){
-                    System.out.println("velha equacao");
-                    return textArea.getText() + this.getBotao().getText().strip();
+                    if (resultado.verificaSinais(textArea.getText())< 20){
+                        return textArea.getText() + this.getBotao().getText().strip();
+                    }
+
+
                 }
             }
 

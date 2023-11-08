@@ -11,14 +11,31 @@
 
 }
 .label{
-    -fx-fill: lawngreen;
+    -fx-text-fill: #808080;
     -fx-label-padding:	2px;
+}
+
+
+#botaoSolucao{
+    -fx-background-color: rgba(0,255,60,0.5);
+    -fx-border-color: #c0c0c0;
+}
+
+#botaoSolucao:hoover{
+    -fx-border-color:  #4169e1;
+
 }
 
 .button{
 
-    -fx-padding: 25px;
+    -fx-padding: 25;
+    -fx-border-color: #c0c0c0;
+
+}
+.button:hoover{
+    -fx-border-color:  #4169e1;
 
 
 }
+
 

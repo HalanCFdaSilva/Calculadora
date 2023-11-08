@@ -115,7 +115,7 @@ public class ResultadoTest {
         String equacao ="1+1÷-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(1+1/-1);
+        String resultadoEsperado = Double.toString(0);
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -127,7 +127,7 @@ public class ResultadoTest {
         String equacao ="1x-1÷-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(1*-1/-1);
+        String resultadoEsperado = Double.toString(1);
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -208,6 +208,16 @@ public class ResultadoTest {
         String resultadoEsperado = Double.toString(-1.0);
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
+
+    }
+
+    @Test
+    public void ChecaNumeroDeSinaisNaEquacaoCorretamente(){
+        Resultado resultado = new Resultado();
+        String equacao = "-55+88x66÷2";
+        int numeroColetado = resultado.verificaSinais(equacao);
+        int numeroEsperado = 4;
+        Assertions.assertEquals(numeroEsperado, numeroColetado);
 
     }
 
