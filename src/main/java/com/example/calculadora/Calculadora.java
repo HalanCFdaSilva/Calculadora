@@ -26,6 +26,8 @@ public class Calculadora extends Application {
             TextArea textArea = new TextArea();
             textArea.setMaxSize(250,50);
             textArea.setId("texto");
+            textArea.setWrapText(true);
+            textArea.setEditable(false);
 
 
 

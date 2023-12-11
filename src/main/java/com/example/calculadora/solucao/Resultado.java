@@ -24,7 +24,6 @@ public class Resultado {
         this.equacao = equacaoNova.replace(",",".");
         this.primeiraVezEquacao = true;
         this.numeros.add(Double.parseDouble("0"));
-
         while (equacao.contains("+")||equacao.contains("x")||
                 equacao.contains("-")||equacao.contains("÷")){
 
@@ -46,7 +45,7 @@ public class Resultado {
 
         }
         if (primeiraVezEquacao){
-            this.resultadoFinal = equacaoNova;
+            this.numeros.set(0, Double.parseDouble(equacaoNova));
 
         }
 

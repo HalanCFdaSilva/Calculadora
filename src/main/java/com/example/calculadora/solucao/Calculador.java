@@ -14,11 +14,6 @@ public class Calculador {
     }
 
     public String run(){
-        System.out.println("------------------");
-        System.out.println(this.numeros.toString());
-        System.out.println(this.sinais.toString());
-
-
 
 
         //MULTIPLICACAO
