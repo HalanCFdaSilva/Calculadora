@@ -24,7 +24,7 @@ public class ResultadoTest {
         String equacao = "55+88x66÷2";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(55.0+88.0*66.0/2);
+        String resultadoEsperado = String.format("%.2f", 55.0+88.0*66.0/2);
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -36,7 +36,7 @@ public class ResultadoTest {
         String equacao = "-55+88x66÷2";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-55+ (double) (88 * 66) /2);
+        String resultadoEsperado = Double.toString(-55+ (double) (88 * 66) /2)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -48,7 +48,7 @@ public class ResultadoTest {
         String equacao ="-55-88";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-55-88);
+        String resultadoEsperado = Double.toString(-55-88)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
@@ -59,7 +59,7 @@ public class ResultadoTest {
         String equacao ="55+88+66";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(55+88+66);
+        String resultadoEsperado = Double.toString(55+88+66)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
@@ -70,7 +70,7 @@ public class ResultadoTest {
         String equacao ="55x88x66";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(55*88*66);
+        String resultadoEsperado = Double.toString(55*88*66)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
@@ -81,7 +81,8 @@ public class ResultadoTest {
         String equacao ="55÷88÷66";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(55.0/88.0/66.0);
+
+        String resultadoEsperado = String.format("%.2f", 55.00/88.00/66.00);
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
@@ -92,7 +93,7 @@ public class ResultadoTest {
         String equacao ="-88÷55";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-88.0/55.0);
+        String resultadoEsperado = Double.toString(-88.00/55.00) + "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
     }
@@ -103,7 +104,7 @@ public class ResultadoTest {
         String equacao ="1x-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-1);
+        String resultadoEsperado = Double.toString(-1)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -115,7 +116,7 @@ public class ResultadoTest {
         String equacao ="1+1÷-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(0);
+        String resultadoEsperado = Double.toString(0)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -127,7 +128,7 @@ public class ResultadoTest {
         String equacao ="1x-1÷-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(1);
+        String resultadoEsperado = Double.toString(1)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -139,13 +140,13 @@ public class ResultadoTest {
         String equacao ="1x1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(1);
+        String resultadoEsperado = Double.toString(1)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
         equacao ="1x2";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        resultadoEsperado = Double.toString(2);
+        resultadoEsperado = Double.toString(2)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -157,7 +158,7 @@ public class ResultadoTest {
         String equacao ="1+-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(0);
+        String resultadoEsperado = Double.toString(0)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -180,7 +181,7 @@ public class ResultadoTest {
         String equacao = "-1+-1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-2.0);
+        String resultadoEsperado = Double.toString(-2.0)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 
@@ -205,7 +206,7 @@ public class ResultadoTest {
         String equacao = "-1x1";
         resultado.pegaNumeros(equacao);
         resultado.calcular();
-        String resultadoEsperado = Double.toString(-1.0);
+        String resultadoEsperado = Double.toString(-1.0)+ "0";
         resultadoEsperado = resultadoEsperado.replace(".",",");
         Assertions.assertEquals(resultadoEsperado, resultado.getResultadoFinal());
 

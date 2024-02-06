@@ -45,7 +45,7 @@ public class Resultado {
 
         }
         if (primeiraVezEquacao){
-            this.numeros.set(0, Double.parseDouble(equacaoNova));
+            this.numeros.set(0, Double.parseDouble(this.equacao));
 
         }
 

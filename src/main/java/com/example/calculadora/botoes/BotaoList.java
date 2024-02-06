@@ -9,9 +9,8 @@ import java.util.List;
 
 public class BotaoList {
     private final ArrayList<Botao>  botoes;
-
-
     Label label;
+
 
     public BotaoList() {
         this.botoes = new ArrayList<>();

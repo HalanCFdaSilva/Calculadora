@@ -35,7 +35,7 @@ public class Calculador {
         }
 
 
-        String resultadoFinal = this.numeros.get(0).toString();
+        String resultadoFinal =String.format("%.4f",this.numeros.get(0));
         return resultadoFinal;
 
 
